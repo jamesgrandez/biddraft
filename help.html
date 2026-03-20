@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BidDraft AI — How to submit your scope of work for the best bid draft possible. South Florida contractor guide.">
+<title>How to Submit Your Scope — BidDraft AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #0d1220;
+    --navy2:     #131928;
+    --navy3:     #1a2235;
+    --orange:    #E8650A;
+    --orange2:   #ff7a20;
+    --orange-glow: rgba(232,101,10,0.15);
+    --orange-pale: rgba(232,101,10,0.08);
+    --white:     #f0f2f5;
+    --offwhite:  #d8dce6;
+    --muted:     #7a8499;
+    --dim:       #3a4255;
+    --rule:      #1e2840;
+    --green:     #22c55e;
+    --green-pale: rgba(34,197,94,0.1);
+    --red:       #ef4444;
+    --red-pale:  rgba(239,68,68,0.1);
+    --yellow:    #f0c040;
+    --yellow-pale: rgba(240,192,64,0.1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,18,32,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--orange); }
+
+  .nav-links {
+    display: flex; gap: 8px; align-items: center;
+  }
+
+  .nav-link {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav-link:hover { color: var(--white); border-color: var(--dim); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--orange2); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 110px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 10%, transparent 100%);
+    opacity: 0.3;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+  .hero-tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .hero-tag::before, .hero-tag::after {
+    content: ''; display: inline-block;
+    width: 24px; height: 1px; background: var(--orange);
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 62px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-promise {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale);
+    border: 1px solid rgba(34,197,94,0.25);
+    padding: 10px 20px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-promise::before { content: '✓'; font-size: 14px; }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; display: inline-block; width: 18px; height: 2px; background: var(--orange); }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 44px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  /* ── FIELD GUIDE ── */
+  .field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .field-item {
+    background: var(--navy2);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--dim);
+    padding: 20px 22px;
+    transition: border-left-color 0.15s;
+  }
+
+  .field-item.required { border-left-color: var(--orange); }
+  .field-item.optional { border-left-color: var(--dim); }
+  .field-item.pro-tip  { border-left-color: var(--green); }
+
+  .field-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .field-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--dim);
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .field-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .field-badge {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .fb-required { background: var(--orange-glow); color: var(--orange); border: 1px solid rgba(232,101,10,0.3); }
+  .fb-optional { background: rgba(255,255,255,0.04); color: var(--dim); border: 1px solid var(--dim); }
+  .fb-impact   { background: var(--green-pale); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+  .field-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 40px;
+  }
+
+  .field-desc strong { color: var(--offwhite); font-weight: 600; }
+
+  .field-example {
+    margin-top: 8px;
+    padding: 10px 14px;
+    background: var(--navy3);
+    border-left: 2px solid var(--orange);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    color: #8899bb;
+    line-height: 1.6;
+  }
+
+  .field-example .ex-label {
+    color: var(--orange);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── TRADE CHECKLISTS ── */
+  .trade-tabs {
+    display: flex; gap: 2px; flex-wrap: wrap;
+    margin-bottom: 3px;
+  }
+
+  .trade-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    background: var(--navy2);
+    border: 1px solid var(--dim);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .trade-tab:hover { color: var(--white); }
+  .trade-tab.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  .trade-panel {
+    display: none;
+    background: var(--navy2);
+    border: 1px solid var(--rule);
+    padding: 28px;
+  }
+  .trade-panel.active { display: block; }
+
+  .trade-panel-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--orange);
+  }
+
+  .trade-panel-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 14px;
+    background: var(--navy3);
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: background 0.12s;
+    user-select: none;
+  }
+  .check-item:hover { background: var(--navy); }
+  .check-item.checked { background: rgba(34,197,94,0.06); border-color: rgba(34,197,94,0.2); }
+  .check-item.checked .ci-box { background: var(--green); border-color: var(--green); }
+  .check-item.checked .ci-box::after { opacity: 1; transform: rotate(45deg) scale(1); }
+  .check-item.checked .ci-text { color: var(--dim); text-decoration: line-through; }
+
+  .ci-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--dim);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.15s;
+  }
+  .ci-box::after {
+    content: '';
+    position: absolute;
+    left: 4px; top: 1px;
+    width: 6px; height: 10px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) scale(0.4);
+    opacity: 0;
+    transition: all 0.15s;
+  }
+
+  .ci-content {}
+  .ci-text {
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    line-height: 1.35;
+  }
+  .ci-sub {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Roboto Mono', monospace;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .ci-critical { color: var(--orange); }
+
+  .checklist-progress {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cp-track {
+    flex: 1; height: 5px;
+    background: var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .cp-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cp-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .cp-label span { color: var(--green); font-weight: 700; }
+
+  /* ── GOOD VS BAD EXAMPLES ── */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+
+  .example-card {
+    padding: 22px;
+    border: 1px solid var(--rule);
+  }
+
+  .example-card.bad  { background: var(--red-pale); border-top: 3px solid var(--red); }
+  .example-card.good { background: var(--green-pale); border-top: 3px solid var(--green); }
+
+  .example-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700;
+  }
+
+  .example-card.bad .example-label  { color: var(--red); }
+  .example-card.good .example-label { color: var(--green); }
+
+  .example-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    line-height: 1.75;
+    color: var(--offwhite);
+    padding: 14px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 2px;
+  }
+
+  .example-issues {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .issue-item {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.4;
+  }
+
+  .example-card.bad  .issue-item { color: #fca5a5; }
+  .example-card.good .issue-item { color: #86efac; }
+
+  .issue-item::before {
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-top: -1px;
+  }
+  .example-card.bad  .issue-item::before { content: '✗'; }
+  .example-card.good .issue-item::before { content: '✓'; }
+
+  /* ── WHAT WE ADD ── */
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+
+  .auto-card {
+    background: var(--navy2);
+    border: 1px solid var(--rule);
+    padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+
+  .auto-icon { font-size: 24px; flex-shrink: 0; }
+
+  .auto-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .auto-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  /* ── FAQ ── */
+  .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .faq-item {
+    background: var(--navy2);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 18px 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    transition: background 0.12s;
+  }
+  .faq-q:hover { background: var(--navy3); }
+
+  .faq-arrow {
+    font-size: 12px;
+    color: var(--orange);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+
+  .faq-a {
+    display: none;
+    padding: 0 20px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    font-weight: 300;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a strong { color: var(--offwhite); font-weight: 600; }
+
+  /* ── CTA ── */
+  .cta-bar {
+    background: var(--navy2);
+    border-top: 1px solid var(--rule);
+    padding: 56px 40px;
+    text-align: center;
+  }
+
+  .cta-bar h2 { margin-bottom: 12px; }
+
+  .cta-bar p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange2); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--rule);
+    padding: 28px 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .footer-logo span { color: var(--orange); }
+
+  .footer-sub {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    nav { padding: 14px 20px; }
+    .nav-links .nav-link { display: none; }
+    .hero { padding: 90px 20px 48px; }
+    .container { padding: 0 20px; }
+    .examples-grid { grid-template-columns: 1fr; }
+    .auto-grid { grid-template-columns: 1fr; }
+    .trade-tabs { gap: 3px; }
+    .trade-tab { font-size: 12px; padding: 8px 12px; }
+    footer { padding: 24px 20px; }
+    .cta-bar { padding: 48px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Bid<span>Draft</span> AI</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">← Back to Home</a>
+    <a href="index.html#get-bid" class="nav-cta">Submit My Scope →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Submission Guide</div>
+    <h1>Get the Best<br><span>Bid Draft</span><br>Possible</h1>
+    <p class="hero-sub">The more detail you give us, the more complete your bid draft will be. This guide shows you exactly what to include — by trade — so nothing gets left out.</p>
+    <div class="hero-promise">Better input = better bid = faster turnaround</div>
+  </div>
+</div>
+
+<!-- WHAT WE ADD AUTOMATICALLY -->
+<section>
+  <div class="container">
+    <div class="section-label">What We Handle For You</div>
+    <h2>We Add This <span style="color:var(--orange)">Automatically</span></h2>
+    <p class="section-sub">You don't need to include any of the following — BidDraft AI adds it automatically based on your trade, location, and scope.</p>
+
+    <div class="auto-grid">
+      <div class="auto-card">
+        <div class="auto-icon">📋</div>
+        <div>
+          <div class="auto-title">Broward County Permit Language</div>
+          <div class="auto-desc">Correct permit category, current fee ranges, and inspection requirements for your trade and job type.</div>
+        </div>
+      </div>
+      <div class="auto-card">
+        <div class="auto-icon">🌀</div>
+        <div>
+          <div class="auto-title">Miami-Dade NOA References</div>
+          <div class="auto-desc">Wind resistance specs, NOA approval language, and FBC Section R905 / R903 references for roofing work.</div>
+        </div>
+      </div>
+      <div class="auto-card">
+        <div class="auto-icon">⚖️</div>
+        <div>
+          <div class="auto-title">Contract & Warranty Language</div>
+          <div class="auto-desc">Payment terms (50/50 deposit), standard warranty periods for each trade, and liability disclaimers.</div>
+        </div>
+      </div>
+      <div class="auto-card">
+        <div class="auto-icon">💰</div>
+        <div>
+          <div class="auto-title">Broward Sales Tax (7%)</div>
+          <div class="auto-desc">Correct 7% Broward County sales tax applied to materials line items. Labor is not taxed — we know the difference.</div>
+        </div>
+      </div>
+      <div class="auto-card">
+        <div class="auto-icon">⚡</div>
+        <div>
+          <div class="auto-title">FPL Coordination Language</div>
+          <div class="auto-desc">For electrical work — FPL disconnect coordination notes and rebate program references added automatically.</div>
+        </div>
+      </div>
+      <div class="auto-card">
+        <div class="auto-icon">🔩</div>
+        <div>
+          <div class="auto-title">South Florida Material Specs</div>
+          <div class="auto-desc">Hot-dip galvanized hardware callouts, ACQ pressure treatment ratings, R-8 duct insulation, and Sunshine 811 locate requirements.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIELD BY FIELD GUIDE -->
+<section>
+  <div class="container">
+    <div class="section-label">Field Guide</div>
+    <h2>What Each Field <span style="color:var(--orange)">Means</span></h2>
+    <p class="section-sub">Walk through every field in the submission form. Required fields are marked — optional fields improve your bid but won't block submission.</p>
+
+    <div class="field-list">
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">01</div>
+          <div class="field-name">Your Name</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          Your first and last name. This appears on the bid as the contractor contact. <strong>Use your real name</strong> — not your company name (that's the next field).
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">02</div>
+          <div class="field-name">Company Name</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          Your licensed business name exactly as it appears on your Broward County or Florida DBPR license. This goes on the bid header — it needs to match your license.
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">03</div>
+          <div class="field-name">License Number</div>
+          <span class="field-badge fb-required">Required</span>
+          <span class="field-badge fb-impact">Improves Bid</span>
+        </div>
+        <div class="field-desc">
+          Your Florida state license number. <strong>Trade-specific formats:</strong><br><br>
+          • Roofing: <strong>CCC</strong> followed by 7 digits (e.g. CCC1234567)<br>
+          • HVAC/AC: <strong>CAC</strong> followed by 6 digits (e.g. CAC123456)<br>
+          • Electrical: <strong>EC</strong> or <strong>ER</strong> followed by 13 digits<br>
+          • Plumbing: <strong>CFC</strong> followed by 7 digits<br>
+          • General Contractor: <strong>CGC</strong> or <strong>CBC</strong> followed by 7 digits<br><br>
+          Including this makes your bid look legitimate and professional to clients and adjusters.
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">04</div>
+          <div class="field-name">Email Address</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          The email address we send your completed bid draft to. <strong>Double-check this</strong> — a typo here means your bid goes nowhere.
+        </div>
+      </div>
+
+      <div class="field-item optional">
+        <div class="field-header">
+          <div class="field-num">05</div>
+          <div class="field-name">Phone Number</div>
+          <span class="field-badge fb-optional">Optional</span>
+        </div>
+        <div class="field-desc">
+          We'll only use this if we have a quick follow-up question about your scope. Speeds up delivery if your description needs clarification.
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">06</div>
+          <div class="field-name">Trade Type</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          Select your trade from the dropdown. This tells BidDraft which permit category, code sections, and warranty language to use. <strong>If your job crosses trades</strong> (e.g. a GC managing both framing and electrical), select General Contractor and describe all trades in the scope of work field.
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">07</div>
+          <div class="field-name">Property Address</div>
+          <span class="field-badge fb-required">Required</span>
+          <span class="field-badge fb-impact">Affects Permit Fees</span>
+        </div>
+        <div class="field-desc">
+          The full address of the job site — not your business address. <strong>Why this matters:</strong> permit fees and requirements differ between unincorporated Broward County and municipalities like City of Sunrise, Plantation, Tamarac, or Davie. Getting the jurisdiction right gets the permit fee right.
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">08</div>
+          <div class="field-name">Job Type</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          Select the closest match: New Installation, Full Replacement, Repair/Patch, Addition, or Remodel/Renovation. <strong>This affects the permit type and scope language significantly.</strong> A "full replacement" triggers tear-off and disposal line items that a "repair" doesn't.
+        </div>
+      </div>
+
+      <div class="field-item required pro-tip">
+        <div class="field-header">
+          <div class="field-num">09</div>
+          <div class="field-name">Scope of Work Description</div>
+          <span class="field-badge fb-required">Required</span>
+          <span class="field-badge fb-impact">Most Important Field</span>
+        </div>
+        <div class="field-desc">
+          <strong>This is the most important field.</strong> The more detail you give here, the better your bid draft. Write it the way you'd explain the job to a customer — what are you doing, where, how big, with what materials?<br><br>
+          <strong>Include:</strong> Square footage / linear feet / system size · Existing conditions (is there something being removed or replaced?) · Any specific requirements the customer gave you · Anything unusual about the job.<br><br>
+          <strong>See the Good vs. Bad examples section below for each trade.</strong>
+        </div>
+        <div class="field-example">
+          <span class="ex-label">// Good example (roofing)</span>
+          "Replace existing 2,200 sq ft asphalt shingle roof on single-family home in Sunrise FL 33323. Remove existing two layers of shingles and underlayment, inspect decking, replace any damaged sheets, install new 30 lb felt, install OC Duration architectural shingles in Onyx Black. Replace 6 turtle vents with mushroom vents. Need Broward County permit and wind mitigation report for insurance."
+        </div>
+      </div>
+
+      <div class="field-item optional">
+        <div class="field-header">
+          <div class="field-num">10</div>
+          <div class="field-name">Materials / Brands</div>
+          <span class="field-badge fb-optional">Optional</span>
+          <span class="field-badge fb-impact">Improves Accuracy</span>
+        </div>
+        <div class="field-desc">
+          If you already know what materials or brands you're using, list them here. <strong>Examples:</strong> "Carrier 3-ton Infinity series", "OC Duration shingles", "Trex Enhance composite decking", "Moen Posi-Temp shower valve." Brand names let us include the correct product specs and NOA numbers where applicable.
+        </div>
+      </div>
+
+      <div class="field-item optional">
+        <div class="field-header">
+          <div class="field-num">11</div>
+          <div class="field-name">Your Labor Rate</div>
+          <span class="field-badge fb-optional">Optional</span>
+          <span class="field-badge fb-impact">Improves Pricing</span>
+        </div>
+        <div class="field-desc">
+          If you leave this blank, we use South Florida market averages for your trade. If your rates are different — higher or lower — enter your rate here and we'll build the labor line items around your actual numbers. <strong>Format:</strong> "$85/hr" or "$12/sq for install" or "lump sum $4,500 labor."
+        </div>
+      </div>
+
+      <div class="field-item required">
+        <div class="field-header">
+          <div class="field-num">12</div>
+          <div class="field-name">Estimated Job Size</div>
+          <span class="field-badge fb-required">Required</span>
+        </div>
+        <div class="field-desc">
+          A rough estimate of the total job value. This helps calibrate the bid's overall pricing and detail level. If you're unsure, pick the closest range. It doesn't need to be exact.
+        </div>
+      </div>
+
+      <div class="field-item optional">
+        <div class="field-header">
+          <div class="field-num">13</div>
+          <div class="field-name">When Does This Bid Need to Be Sent?</div>
+          <span class="field-badge fb-optional">Optional</span>
+        </div>
+        <div class="field-desc">
+          If you have a deadline — a customer meeting, an insurance appointment, a submission deadline — tell us. We prioritize urgent bids. Standard delivery is within 24 hours. <strong>Same-day delivery available</strong> for submissions received before 3pm EST.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GOOD VS BAD EXAMPLES BY TRADE -->
+<section>
+  <div class="container">
+    <div class="section-label">Examples by Trade</div>
+    <h2>Good vs. Bad <span style="color:var(--orange)">Submissions</span></h2>
+    <p class="section-sub">See exactly what makes a scope of work usable vs. what sends us back to you with questions — by trade.</p>
+
+    <div class="trade-tabs" id="exTabs">
+      <button class="trade-tab active" onclick="showEx('roofing', this)">🏗️ Roofing</button>
+      <button class="trade-tab" onclick="showEx('hvac', this)">❄️ HVAC</button>
+      <button class="trade-tab" onclick="showEx('electrical', this)">⚡ Electrical</button>
+      <button class="trade-tab" onclick="showEx('plumbing', this)">🔧 Plumbing</button>
+      <button class="trade-tab" onclick="showEx('gc', this)">🏠 General</button>
+    </div>
+
+    <div id="ex-roofing" class="trade-panel active">
+      <div class="examples-grid">
+        <div class="example-card bad">
+          <div class="example-label">✗ Not Enough Info</div>
+          <div class="example-text">"Roof job on a house in Sunrise, need a bid asap"</div>
+          <div class="example-issues">
+            <div class="issue-item">No square footage — can't price labor or materials</div>
+            <div class="issue-item">No material type — can't specify NOA or product</div>
+            <div class="issue-item">No job type — new, replace, or repair?</div>
+            <div class="issue-item">We'll need to email you back before generating</div>
+          </div>
+        </div>
+        <div class="example-card good">
+          <div class="example-label">✓ Ready to Generate</div>
+          <div class="example-text">"Replace existing 2,200 sq ft asphalt shingle roof on single-family home at 1420 NW Coral Ridge Dr, Sunrise FL 33322. Remove 2 layers shingles, inspect decking, install 30 lb felt, OC Duration shingles Onyx Black. Replace 6 turtle vents. Need Broward County permit + wind mit report."</div>
+          <div class="example-issues">
+            <div class="issue-item">Square footage confirmed (2,200 sq ft)</div>
+            <div class="issue-item">Material specified (OC Duration — we know the NOA)</div>
+            <div class="issue-item">Job type clear (full replacement, 2-layer tear-off)</div>
+            <div class="issue-item">Permit + wind mit noted — we include both</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ex-hvac" class="trade-panel">
+      <div class="examples-grid">
+        <div class="example-card bad">
+          <div class="example-label">✗ Not Enough Info</div>
+          <div class="example-text">"Install new AC unit in a house in Plantation"</div>
+          <div class="example-issues">
+            <div class="issue-item">No tonnage — biggest factor in pricing</div>
+            <div class="issue-item">No ductwork scope — replace or keep existing?</div>
+            <div class="issue-item">No brand — can't reference specs or FPL rebate</div>
+            <div class="issue-item">House size unknown — can't validate load</div>
+          </div>
+        </div>
+        <div class="example-card good">
+          <div class="example-label">✓ Ready to Generate</div>
+          <div class="example-text">"Replace existing 3-ton Carrier AC system on 1,800 sq ft single-family in Plantation FL. Remove old condenser + air handler. Install new Carrier 3-ton 16 SEER2. Replace flex ductwork in 4 rooms (~80 LF). Need Broward County mechanical permit. FPL rebate if eligible."</div>
+          <div class="example-issues">
+            <div class="issue-item">Tonnage confirmed (3-ton)</div>
+            <div class="issue-item">Brand specified (Carrier — FPL rebate language added)</div>
+            <div class="issue-item">Ductwork scope clear (4 rooms, 80 LF)</div>
+            <div class="issue-item">Home size included for permit documentation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ex-electrical" class="trade-panel">
+      <div class="examples-grid">
+        <div class="example-card bad">
+          <div class="example-label">✗ Not Enough Info</div>
+          <div class="example-text">"Panel upgrade and some new circuits in Tamarac"</div>
+          <div class="example-issues">
+            <div class="issue-item">No amperage — 200A upgrade vs. 150A is very different</div>
+            <div class="issue-item">"Some circuits" — how many? What type?</div>
+            <div class="issue-item">No FPL coordination noted</div>
+            <div class="issue-item">Property address missing — permit fee depends on city</div>
+          </div>
+        </div>
+        <div class="example-card good">
+          <div class="example-label">✓ Ready to Generate</div>
+          <div class="example-text">"200A panel upgrade at 8820 NW 56th St, Tamarac FL. Replace existing 100A panel with new 200A Square D. Add 6 new circuits: 2x 20A kitchen GFCI, 1x 30A dryer, 1x 20A office, 1x 20A outdoor GFCI, 1x 20A garage. Coordinate FPL disconnect. Pull Broward County permit."</div>
+          <div class="example-issues">
+            <div class="issue-item">Amperage clear (200A upgrade from 100A)</div>
+            <div class="issue-item">All 6 circuits specified with amperage and type</div>
+            <div class="issue-item">FPL noted — we include coordination language</div>
+            <div class="issue-item">Property address → correct permit jurisdiction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ex-plumbing" class="trade-panel">
+      <div class="examples-grid">
+        <div class="example-card bad">
+          <div class="example-label">✗ Not Enough Info</div>
+          <div class="example-text">"Re-pipe a house and new water heater in Fort Lauderdale"</div>
+          <div class="example-issues">
+            <div class="issue-item">No home size — re-pipe pricing scales with square footage</div>
+            <div class="issue-item">No pipe material — CPVC vs PEX is a significant cost difference</div>
+            <div class="issue-item">Water heater size unknown (40 gal? 50 gal? tankless?)</div>
+            <div class="issue-item">No property address for permit jurisdiction</div>
+          </div>
+        </div>
+        <div class="example-card good">
+          <div class="example-label">✓ Ready to Generate</div>
+          <div class="example-text">"Full re-pipe of 1,600 sq ft 3/2 home in Fort Lauderdale using PEX-A. Remove all old galvanized supply lines. Install new PEX to all fixtures (3 bathrooms, kitchen, laundry). Also replace 50-gal electric water heater. Pull Broward County plumbing permit. Property: 2241 SW 15th Ave, Fort Lauderdale FL 33312."</div>
+          <div class="example-issues">
+            <div class="issue-item">Home size and layout confirmed</div>
+            <div class="issue-item">Material specified (PEX-A)</div>
+            <div class="issue-item">All fixture locations listed</div>
+            <div class="issue-item">Water heater size and type clear (50-gal electric)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ex-gc" class="trade-panel">
+      <div class="examples-grid">
+        <div class="example-card bad">
+          <div class="example-label">✗ Not Enough Info</div>
+          <div class="example-text">"Kitchen and bathroom remodel in Davie, pretty big job"</div>
+          <div class="example-issues">
+            <div class="issue-item">"Pretty big" isn't a scope — no square footage or room count</div>
+            <div class="issue-item">No specifics — demo, tile, cabinets, plumbing, electrical?</div>
+            <div class="issue-item">Client-supplied fixtures or contractor-supplied?</div>
+            <div class="issue-item">No permit info — is this permit-required scope?</div>
+          </div>
+        </div>
+        <div class="example-card good">
+          <div class="example-label">✓ Ready to Generate</div>
+          <div class="example-text">"Full kitchen and master bath remodel at 4420 SW 64th Ave, Davie FL 33314. Kitchen: remove existing cabinets/countertops, install new 42-in upper cabinets, quartz countertop, tile backsplash, new sink + faucet. Client supplies appliances. Bathroom: gut 80 sq ft bath, new tile floor + shower surround, new vanity, toilet, shower door. Licensed subs for plumbing + electrical. Pull Broward building permit."</div>
+          <div class="example-issues">
+            <div class="issue-item">Both rooms described with specifics</div>
+            <div class="issue-item">Client-supplied vs. contractor-supplied noted</div>
+            <div class="issue-item">Sub-trades identified (plumbing + electrical)</div>
+            <div class="issue-item">Property address for permit + bathroom sq ft for pricing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADE CHECKLISTS -->
+<section>
+  <div class="container">
+    <div class="section-label">Pre-Submission Checklist</div>
+    <h2>Check Before You <span style="color:var(--orange)">Submit</span></h2>
+    <p class="section-sub">Pick your trade and check off every item before hitting submit. The more you check, the better your bid draft.</p>
+
+    <div class="trade-tabs" id="clTabs">
+      <button class="trade-tab active" onclick="showCl('roofing', this)">🏗️ Roofing</button>
+      <button class="trade-tab" onclick="showCl('hvac', this)">❄️ HVAC</button>
+      <button class="trade-tab" onclick="showCl('electrical', this)">⚡ Electrical</button>
+      <button class="trade-tab" onclick="showCl('plumbing', this)">🔧 Plumbing</button>
+      <button class="trade-tab" onclick="showCl('gc', this)">🏠 General</button>
+    </div>
+
+    <!-- ROOFING -->
+    <div id="cl-roofing" class="trade-panel active">
+      <div class="trade-panel-title">Roofing Checklist</div>
+      <div class="trade-panel-sub">// Check each item you've included in your scope of work description</div>
+      <div class="checklist" id="check-roofing">
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Roof square footage (total area being worked)</div><div class="ci-sub">Most critical number for pricing — don't estimate, measure</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Full property address (street, city, zip)</div><div class="ci-sub">Determines permit jurisdiction — Broward unincorporated vs. city</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Job type — new install, full replacement, or repair?</div><div class="ci-sub">Replacement = tear-off line items; repair = no tear-off</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">How many layers of existing roofing to remove?</div><div class="ci-sub">1 layer vs. 2+ significantly affects labor cost and disposal fees</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Shingle brand and product line (if known)</div><div class="ci-sub">E.g. "OC Duration", "GAF Timberline HDZ", "CertainTeed Landmark" — allows NOA reference</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Flat roof or pitched? Flat: TPO / Modified Bitumen / BUR?</div><div class="ci-sub">Flat roofs use completely different materials and permit categories</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Number and type of roof penetrations (vents, pipes, A/C curbs)</div><div class="ci-sub">Each penetration adds a flashing line item</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Wind mitigation report required? (usually yes for insurance claims)</div><div class="ci-sub">Adds $150 to the bid — include if your customer needs it for their insurer</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'r')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Any skylights, solar panels, or other special features?</div><div class="ci-sub">These require additional coordination and separate line items</div></div></div>
+      </div>
+      <div class="checklist-progress"><div class="cp-track"><div class="cp-fill" id="prog-roofing"></div></div><div class="cp-label"><span id="pct-roofing">0</span>% complete</div></div>
+    </div>
+
+    <!-- HVAC -->
+    <div id="cl-hvac" class="trade-panel">
+      <div class="trade-panel-title">HVAC Checklist</div>
+      <div class="trade-panel-sub">// Check each item you've included in your scope of work description</div>
+      <div class="checklist" id="check-hvac">
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ System size in tons (e.g. 2-ton, 3-ton, 4-ton)</div><div class="ci-sub">Single most important number — all pricing flows from tonnage</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ New install or replacement? If replacement, what's being removed?</div><div class="ci-sub">Removal and haul-off of old equipment is a significant line item</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Full property address</div><div class="ci-sub">For permit jurisdiction and FPL district identification</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Brand preference (Carrier, Trane, Lennox, Goodman, etc.)</div><div class="ci-sub">Specific brands may qualify for FPL rebates — we'll add the language</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">SEER rating required? (16 SEER2 is current Florida minimum)</div><div class="ci-sub">Higher SEER = higher equipment cost but potential FPL rebate</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Ductwork scope — replace, clean, or keep existing?</div><div class="ci-sub">New ductwork can add $2,000–4,000+ to a job — needs to be in the bid</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">How many rooms / zones?</div><div class="ci-sub">Affects duct run count and line item breakdown</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Air handler location — attic, closet, garage?</div><div class="ci-sub">Attic installs require different labor and condensate pan requirements</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'h')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Square footage of the home / space being conditioned</div><div class="ci-sub">For Manual J load calculation documentation in the permit package</div></div></div>
+      </div>
+      <div class="checklist-progress"><div class="cp-track"><div class="cp-fill" id="prog-hvac"></div></div><div class="cp-label"><span id="pct-hvac">0</span>% complete</div></div>
+    </div>
+
+    <!-- ELECTRICAL -->
+    <div id="cl-electrical" class="trade-panel">
+      <div class="trade-panel-title">Electrical Checklist</div>
+      <div class="trade-panel-sub">// Check each item you've included in your scope of work description</div>
+      <div class="checklist" id="check-electrical">
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Full property address (city affects permit fees significantly)</div><div class="ci-sub">City of Sunrise vs. unincorporated Broward = different fee schedules</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Panel amperage (100A? 150A? 200A? upgrading from what to what?)</div><div class="ci-sub">The single biggest variable in panel upgrade pricing</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">New circuits — how many, what amperage, what type?</div><div class="ci-sub">List each: "2x 20A kitchen GFCI, 1x 30A dryer, 1x 20A outdoor"</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">FPL disconnect required? (almost always yes for panel work)</div><div class="ci-sub">We include FPL coordination language automatically when noted</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Meter base replacement needed? (older homes may need new smart meter base)</div><div class="ci-sub">FPL now requires compatible meter bases in many areas</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Is this a service entrance cable replacement as well?</div><div class="ci-sub">SER cable from meter to panel — significant material and labor cost</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Any lighting, ceiling fan, or outlet work in scope?</div><div class="ci-sub">List the room and what's being installed for accurate line items</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'e')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Any generator hookup, EV charger, or solar tie-in?</div><div class="ci-sub">These require specific permit categories and additional line items</div></div></div>
+      </div>
+      <div class="checklist-progress"><div class="cp-track"><div class="cp-fill" id="prog-electrical"></div></div><div class="cp-label"><span id="pct-electrical">0</span>% complete</div></div>
+    </div>
+
+    <!-- PLUMBING -->
+    <div id="cl-plumbing" class="trade-panel">
+      <div class="trade-panel-title">Plumbing Checklist</div>
+      <div class="trade-panel-sub">// Check each item you've included in your scope of work description</div>
+      <div class="checklist" id="check-plumbing">
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Full property address</div><div class="ci-sub">Permit jurisdiction — City of Sunrise, Plantation, Tamarac or unincorporated</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Job type — re-pipe, water heater, fixture install, drain work?</div><div class="ci-sub">Each has completely different permit requirements and pricing</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">For re-pipe: home square footage and number of bathrooms</div><div class="ci-sub">Scales the material and labor estimates for the full house</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Pipe material — CPVC, PEX-A, PEX-B, copper?</div><div class="ci-sub">Major cost difference: copper > PEX-A > PEX-B > CPVC</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Water heater: size (gallons), type (electric/gas/tankless), brand</div><div class="ci-sub">All three factors affect price, permit type, and code requirements</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Number of fixtures being served (toilets, sinks, showers)</div><div class="ci-sub">For re-pipes and bathroom remodels — drives material quantities</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Is this a high-rise / condo job? (requires different approach)</div><div class="ci-sub">Condo plumbing has HOA, building manager, and shut-off coordination requirements</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'p')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Any drain / sewer scope? (hydro-jet, camera inspection, line repair)</div><div class="ci-sub">Drain work is a separate permit category from supply plumbing</div></div></div>
+      </div>
+      <div class="checklist-progress"><div class="cp-track"><div class="cp-fill" id="prog-plumbing"></div></div><div class="cp-label"><span id="pct-plumbing">0</span>% complete</div></div>
+    </div>
+
+    <!-- GC -->
+    <div id="cl-gc" class="trade-panel">
+      <div class="trade-panel-title">General Contractor Checklist</div>
+      <div class="trade-panel-sub">// Check each item you've included in your scope of work description</div>
+      <div class="checklist" id="check-gc">
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Full property address</div><div class="ci-sub">Required for permit jurisdiction and fee schedule</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ List every trade in scope (framing, tile, plumbing, electrical, etc.)</div><div class="ci-sub">Each trade needs its own line items — don't leave any out</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text ci-critical">✦ Square footage for each area being worked (kitchen, bath, addition)</div><div class="ci-sub">Tile, drywall, and flooring pricing all scale with area</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Demo scope — what exactly is being removed?</div><div class="ci-sub">Demo and haul-off is often 15–20% of a remodel cost — list it</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Client-supplied vs. contractor-supplied fixtures and materials</div><div class="ci-sub">If client is buying appliances, cabinets, or tile — say so. Changes the bid total significantly.</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Structural work? (load-bearing walls, additions, room conversions)</div><div class="ci-sub">Structural scope requires engineering drawings and a separate permit — needs to be called out</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Are licensed subs handling plumbing / electrical?</div><div class="ci-sub">List as "Licensed electrical subcontractor" — affects bid language and liability</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Any HOA or condo board approvals required?</div><div class="ci-sub">Affects timeline, adds coordination language to the bid</div></div></div>
+        <div class="check-item" onclick="checkItem(this,'g')"><div class="ci-box"></div><div class="ci-content"><div class="ci-text">Is this an insurance claim / restoration job?</div><div class="ci-sub">Insurance jobs need specific documentation language and often require a supplement process</div></div></div>
+      </div>
+      <div class="checklist-progress"><div class="cp-track"><div class="cp-fill" id="prog-gc"></div></div><div class="cp-label"><span id="pct-gc">0</span>% complete</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-label">Common Questions</div>
+    <h2>Quick <span style="color:var(--orange)">Answers</span></h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How long does it take to get my bid draft back?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          Standard delivery is <strong>within 24 hours</strong> of your submission. Submissions received before 3pm EST typically get same-day delivery. If you have an urgent deadline, note it in the "When does this need to be sent?" field and we'll prioritize your bid.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What if I don't know all the details yet?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          Submit what you have. If your scope is missing a critical detail — like square footage or system size — we'll email you back with one specific question before generating. We'd rather ask than guess and get the numbers wrong. We'll still get your bid back same-day in most cases.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Will the pricing in the bid match my actual costs?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          The bid uses <strong>current South Florida market averages</strong> for your trade. If your actual costs are different — higher materials costs, different labor rate — you can adjust the numbers before sending to your customer. Think of the draft as a professionally structured starting point, not a final number. That's why we include the line item breakdown — so you can see and change each individual figure.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What do I do with the bid draft once I receive it?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          Review it, adjust any numbers that don't match your actual costs, add your company letterhead or logo, and send it to your customer. The bid is yours completely — you own it, edit it, and send it as your own professional proposal. BidDraft AI generates the structure and language; you verify the numbers and put your name on it.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Are the Broward County permit fees accurate?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          We use current Broward County published fee schedules. Permit fees are shown as <strong>estimates</strong> in the bid because the exact fee depends on the declared job value at the time of permit application. The ranges we include are accurate for typical jobs in each trade — within 5–10% of the actual fee in most cases. Always confirm the final permit fee with Broward County Building Division before submitting your permit application.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I submit multiple jobs at once?
+          <span class="faq-arrow">▸</span>
+        </div>
+        <div class="faq-a">
+          Yes — submit each job as a separate form submission. Each one gets its own bid draft delivered to your email. If you're on the Founding Member plan, all your submissions are prioritized and you can submit as many jobs per month as you need.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-bar">
+  <div class="container" style="max-width:560px;">
+    <div class="section-label" style="justify-content:center;">Ready to Submit</div>
+    <h2>Got Everything?<br><span style="color:var(--orange)">Let's Go.</span></h2>
+    <p>Use the checklist above to confirm your scope is complete, then submit and get your bid draft back same day.</p>
+    <a href="index.html#get-bid" class="btn-primary">Submit My Scope of Work →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bid<span>Draft</span> AI</div>
+  <div class="footer-sub">
+    South Florida contractors · Sunrise, FL 33323<br>
+    jamesgrandez2021@gmail.com · Currently in beta<br>
+    Bid drafts are starting points — always verify numbers and permit fees before submitting to clients or authorities.
+  </div>
+</footer>
+
+<script>
+  // ── Example tabs ──
+  function showEx(id, btn) {
+    document.querySelectorAll('[id^="ex-"]').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('#exTabs .trade-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('ex-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── Checklist tabs ──
+  function showCl(id, btn) {
+    document.querySelectorAll('[id^="cl-"]').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('#clTabs .trade-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('cl-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── Checklist items ──
+  function checkItem(item, tradeKey) {
+    item.classList.toggle('checked');
+    updateProgress(item.closest('.checklist'), tradeKey);
+  }
+
+  const tradeMap = { r:'roofing', h:'hvac', e:'electrical', p:'plumbing', g:'gc' };
+
+  function updateProgress(list, key) {
+    const full = tradeMap[key] || key;
+    const items = list.querySelectorAll('.check-item');
+    const checked = list.querySelectorAll('.check-item.checked').length;
+    const pct = Math.round((checked / items.length) * 100);
+    document.getElementById('prog-' + full).style.width = pct + '%';
+    document.getElementById('pct-' + full).textContent = pct;
+  }
+
+  // ── FAQ ──
+  function toggleFaq(q) {
+    q.closest('.faq-item').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
