@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BidDraft AI — Stop spending 3 hours writing bids. South Florida contractors get professional bid drafts in 2 minutes. Free to try.">
+<title>BidDraft AI — Professional Bids in 2 Minutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1220;
+    --navy2: #131928;
+    --navy3: #1a2235;
+    --orange: #E8650A;
+    --orange2: #ff7a20;
+    --orange-glow: rgba(232,101,10,0.15);
+    --white: #f0f2f5;
+    --offwhite: #d8dce6;
+    --muted: #7a8499;
+    --dim: #3a4255;
+    --rule: #1e2840;
+    --green: #22c55e;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,18,32,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--orange); }
+
+  .nav-badge {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    background: var(--orange-glow);
+  }
+
+  .nav-cta {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 22px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--orange2); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 40px 80px;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    opacity: 0.35;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 2px;
+    background: var(--orange);
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  h1 .line-orange { color: var(--orange); display: block; }
+  h1 .line-outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--offwhite);
+    max-width: 460px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .hero-sub strong { color: var(--white); font-weight: 600; }
+
+  .hero-cta-group {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.4s forwards;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-primary:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(232,101,10,0.4); }
+
+  .btn-secondary {
+    color: var(--offwhite);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    text-decoration: none;
+    border: 1px solid var(--dim);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--offwhite); color: var(--white); }
+
+  .hero-stats {
+    display: flex; gap: 32px;
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+
+  .hstat {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+
+  .hstat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .hstat-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  /* ── HERO SAMPLE BID PREVIEW ── */
+  .bid-preview {
+    background: var(--navy2);
+    border: 1px solid var(--dim);
+    border-top: 3px solid var(--orange);
+    padding: 0;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.5s forwards;
+    max-height: 520px;
+    overflow: hidden;
+  }
+
+  .bid-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(transparent, var(--navy2));
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .bid-preview-bar {
+    background: var(--navy3);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .bid-preview-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .bid-preview-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .bid-preview-content {
+    padding: 20px 22px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #8899bb;
+    overflow: hidden;
+  }
+
+  .bid-preview-content .head { color: var(--white); font-size: 12px; letter-spacing: 0.12em; }
+  .bid-preview-content .section { color: var(--orange); margin-top: 12px; }
+  .bid-preview-content .item { color: #6a7a99; padding-left: 8px; }
+  .bid-preview-content .amount { color: var(--green); }
+  .bid-preview-content .total { color: var(--white); font-size: 13px; border-top: 1px solid var(--dim); padding-top: 8px; margin-top: 8px; }
+
+  .bid-generated-badge {
+    position: absolute;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(232,101,10,0.4);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative; z-index: 1;
+    padding: 100px 40px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--orange);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: inline-block;
+    width: 20px; height: 2px; background: var(--orange);
+  }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 58px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 60px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── PROBLEM ── */
+  .problem-section {
+    background: var(--navy2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .pain-card {
+    background: var(--navy);
+    padding: 36px 28px;
+    border-top: 3px solid var(--dim);
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pain-card:hover { border-top-color: var(--orange); }
+
+  .pain-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -10px; right: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 90px;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .pain-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+
+  .pain-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .pain-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 8px;
+    border: 1px solid var(--rule);
+  }
+
+  .step {
+    padding: 48px 32px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+
+  .step-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 72px;
+    color: var(--orange);
+    line-height: 1;
+    opacity: 0.15;
+    margin-bottom: 20px;
+  }
+
+  .step-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .step-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .step-arrow {
+    position: absolute;
+    right: -18px; top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 36px;
+    background: var(--navy);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    z-index: 2;
+  }
+  .step:last-child .step-arrow { display: none; }
+
+  /* ── SAMPLE BID FULL ── */
+  .bid-section { background: var(--navy2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+
+  .bid-tabs {
+    display: flex; gap: 2px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .bid-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background: var(--navy);
+    border: 1px solid var(--dim);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .bid-tab:hover { color: var(--white); border-color: var(--dim); }
+  .bid-tab.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  .bid-display {
+    background: var(--navy);
+    border: 1px solid var(--dim);
+    display: none;
+  }
+  .bid-display.active { display: block; }
+
+  .bid-display-bar {
+    background: var(--navy3);
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .bid-display-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .bid-display-time {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .bid-display-time::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .bid-body {
+    padding: 28px 32px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.85;
+    color: #7a8fb0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    max-height: 480px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dim) transparent;
+  }
+
+  .bid-body .b-head { color: var(--white); font-size: 12.5px; letter-spacing: 0.1em; }
+  .bid-body .b-section { color: var(--orange); }
+  .bid-body .b-green { color: var(--green); }
+  .bid-body .b-white { color: var(--white); }
+  .bid-body .b-rule { color: var(--dim); }
+
+  /* ── WHY SOUTH FL ── */
+  .fl-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .fl-card {
+    background: var(--navy2);
+    border: 1px solid var(--rule);
+    padding: 28px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .fl-icon { font-size: 28px; flex-shrink: 0; }
+
+  .fl-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .fl-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--navy2);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .cta-inner { max-width: 640px; margin: 0 auto; }
+
+  .cta-sup {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .cta-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 72px);
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+
+  .cta-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .cta-form-wrap {
+    background: var(--navy);
+    border: 1px solid var(--dim);
+    border-top: 3px solid var(--orange);
+    padding: 36px;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
+  .form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .form-sub {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--navy2);
+    border: 1px solid var(--dim);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--orange);
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--dim); }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23E8650A' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+  .form-select option { background: var(--navy2); }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-size: 14px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: var(--orange2); transform: translateY(-1px); }
+
+  .form-disclaimer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .cta-promise {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .promise-item {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .promise-item::before { content: '✓'; color: var(--green); font-size: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--rule);
+    padding: 32px 40px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .footer-logo span { color: var(--orange); }
+
+  .footer-sub {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+  }
+
+  .footer-sub a { color: var(--muted); text-decoration: none; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+    background: var(--navy2);
+  }
+
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .trust-item .t-icon { font-size: 16px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── SUCCESS STATE ── */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .success-msg.show { display: block; }
+  .success-icon { font-size: 48px; margin-bottom: 16px; }
+  .success-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .success-body {
+    font-size: 14px;
+    color: var(--muted);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-badge { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .bid-preview { display: none; }
+    section { padding: 64px 20px; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--rule); }
+    .step:last-child { border-bottom: none; }
+    .step-arrow { display: none; }
+    .fl-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .trust-bar { gap: 24px; padding: 20px; }
+    .cta-section { padding: 64px 20px; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bid<span>Draft</span> AI</div>
+  <div class="nav-badge">South Florida Beta</div>
+  <a href="#get-bid" class="nav-cta">Get Free Bid Draft</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">For South Florida Contractors</div>
+      <h1>
+        <span>Stop</span>
+        <span class="line-orange">Wasting</span>
+        <span class="line-outline">Hours</span>
+        <span>On Bids</span>
+      </h1>
+      <p class="hero-sub">
+        You're a <strong>roofer, HVAC, electrician, or GC</strong> — not a secretary.
+        Paste in your scope of work and get back a professional bid draft with line items,
+        Broward County permit language, and contract terms in <strong>under 2 minutes.</strong>
+      </p>
+      <div class="hero-cta-group">
+        <a href="#get-bid" class="btn-primary">Try It Free →</a>
+        <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <span class="hstat-num">2 min</span>
+          <span class="hstat-label">Avg bid turnaround</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-num">$0</span>
+          <span class="hstat-label">Cost to try it</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-num">24 hr</span>
+          <span class="hstat-label">Same-day delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI BID PREVIEW -->
+    <div class="bid-preview">
+      <div class="bid-preview-bar">
+        <div class="bid-preview-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="bid-preview-title">roofing_bid_proposal.txt — Generated</div>
+      </div>
+      <div class="bid-preview-content">
+<span class="head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      ROOFING BID PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+CONTRACTOR:   Sunshine Roofing LLC
+LICENSE #:    CCC1234567
+PROPERTY:     1420 NW Coral Ridge Dr
+              Sunrise, FL 33323
+DATE:         March 17, 2026
+
+<span class="section">SCOPE OF WORK</span>
+<span class="item">• Complete tear-off, 2,200 sq ft</span>
+<span class="item">• OC Duration Series — Miami-Dade NOA</span>
+<span class="item">  NOA #17-1201.02 · 130 MPH rated</span>
+<span class="item">• Ice & water shield at all eaves</span>
+<span class="item">• Replace 6 turtle vents</span>
+<span class="item">• Broward County permit included</span>
+<span class="item">• Wind mitigation report included</span>
+
+<span class="section">LINE ITEMS</span>
+<span class="item">Labor (tear-off + install)</span><span class="amount">    $5,450</span>
+<span class="item">Materials (shingles, felt,</span>
+<span class="item"> drip edge, vents)</span><span class="amount">          $4,956</span>
+<span class="item">Permits & fees</span><span class="amount">               $535</span>
+<span class="item">Sales tax (7% Broward)</span><span class="amount">       $347</span>
+<span class="rule">──────────────────────────────────</span>
+<span class="total">TOTAL PROJECT COST     $11,287.92</span>
+
+<span class="section">PAYMENT TERMS</span>
+<span class="item">50% deposit at signing: $5,643.96</span>
+<span class="item">50% at completion:      $5,643.96</span>
+
+<span class="section">WARRANTY</span>
+<span class="item">10yr workmanship · 30yr manufacturer</span>
+</div>
+      <div class="bid-generated-badge">✓ Generated in 47 seconds</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="t-icon">🏗️</span> Roofing</div>
+  <div class="trust-item"><span class="t-icon">❄️</span> HVAC / AC</div>
+  <div class="trust-item"><span class="t-icon">⚡</span> Electrical</div>
+  <div class="trust-item"><span class="t-icon">🔧</span> Plumbing</div>
+  <div class="trust-item"><span class="t-icon">🏠</span> General Contractors</div>
+  <div class="trust-item"><span class="t-icon">🪵</span> Carpentry & Decks</div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2>Sound <span style="color:var(--orange)">Familiar?</span></h2>
+    <p class="section-sub">Every South Florida contractor we've talked to says the same three things.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card" data-num="01">
+        <span class="pain-icon">🕐</span>
+        <div class="pain-title">Bids Take 2–3 Hours You Don't Have</div>
+        <div class="pain-body">
+          You're running crews, sourcing materials, dealing with inspectors —
+          and then you come home at 7pm and spend the night writing a bid that
+          might not even land. That's your time. That's your life.
+        </div>
+      </div>
+      <div class="pain-card" data-num="02">
+        <span class="pain-icon">📄</span>
+        <div class="pain-title">Bids Look Amateur, Clients Notice</div>
+        <div class="pain-body">
+          A Word doc with inconsistent formatting or a handwritten estimate
+          costs you jobs to guys who present better — even if your work is
+          better. In South Florida, insurance and HOA jobs especially require
+          professional documentation to even be considered.
+        </div>
+      </div>
+      <div class="pain-card" data-num="03">
+        <span class="pain-icon">🌀</span>
+        <div class="pain-title">Every Bid Season You Fall Behind</div>
+        <div class="pain-body">
+          After hurricane season, after a big storm — bid volume spikes and
+          the guys who can respond fast win the work. If you're slow to
+          quote, the job goes to whoever shows up first with a number on paper.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label">The Solution</div>
+    <h2>How It <span style="color:var(--orange)">Works</span></h2>
+    <p class="section-sub">Three steps. No software to install. No learning curve. No credit card.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="step-icon">📋</span>
+        <div class="step-title">Describe The Job</div>
+        <div class="step-body">
+          Fill out the form below. Tell us the trade, the job scope, and any
+          specifics — square footage, materials you use, anything you'd normally
+          include. The more detail, the better the output. Takes 3 minutes.
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="step-icon">🤖</span>
+        <div class="step-title">AI Writes The Bid</div>
+        <div class="step-body">
+          BidDraft AI generates a complete bid proposal — line-item labor and
+          materials, Broward County permit language, South Florida code references,
+          payment terms, and warranty language. Built specifically for South Florida
+          contractors, not generic templates.
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="step-icon">✉️</span>
+        <div class="step-title">Get It Same Day</div>
+        <div class="step-body">
+          We email you the finished bid draft within 24 hours — usually the
+          same day. You review it, adjust your numbers, put your letterhead on
+          it, and send it to your client. You own it completely.
+        </div>
+        <div class="step-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE BIDS -->
+<section class="bid-section">
+  <div class="container">
+    <div class="section-label">Live Examples</div>
+    <h2>Real Bid <span style="color:var(--orange)">Samples</span></h2>
+    <p class="section-sub">These are actual outputs from BidDraft AI — South Florida specs, real permit numbers, real license categories.</p>
+
+    <div class="bid-tabs">
+      <button class="bid-tab active" onclick="showBid('roofing', this)">🏗️ Roofing</button>
+      <button class="bid-tab" onclick="showBid('bathroom', this)">🚿 Bathroom</button>
+      <button class="bid-tab" onclick="showBid('hvac', this)">❄️ HVAC</button>
+      <button class="bid-tab" onclick="showBid('electrical', this)">⚡ Electrical</button>
+      <button class="bid-tab" onclick="showBid('deck', this)">🪵 Deck</button>
+    </div>
+
+    <div class="bid-display active" id="bid-roofing">
+      <div class="bid-display-bar">
+        <div class="bid-display-label">roofing_replacement_sunrise_fl.txt</div>
+        <div class="bid-display-time">Generated in 47 sec</div>
+      </div>
+      <div class="bid-body"><span class="b-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    ROOFING BID PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="b-white">CONTRACTOR:   [YOUR COMPANY NAME]
+LICENSE #:    [CCC LICENSE NUMBER]
+PREPARED FOR: [CLIENT NAME]
+PROPERTY:     Sunrise, FL 33323
+DATE:         [DATE]          BID VALID: 30 days</span>
+
+<span class="b-section">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCOPE OF WORK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+• Complete tear-off and disposal of existing asphalt shingle roofing (2,200 sq ft)
+• Install OC Duration Series — Miami-Dade NOA #17-1201.02 · 130 MPH wind rated
+• Install 30 lb. felt underlayment per Florida Building Code Section R905.2
+• Ice & water shield at all eaves (first 3 ft) and in all valleys per FBC
+• Replace 6 turtle vents with Miami-Dade approved mushroom vents
+• Re-flash all roof penetrations, pipe boots, and vents
+• Install new drip edge flashing at eaves and rakes
+• Pull Broward County roofing permit — included
+• Wind mitigation report provided upon completion — included
+• Final inspection with Broward County building department
+• Full debris removal and magnetic nail sweep upon completion
+
+<span class="b-section">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LINE-ITEM PRICING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+LABOR
+  Tear-off & disposal (2,200 sq ft)             $1,540.00
+  New roof installation (2,200 sq ft)           $2,860.00
+  Flashing & boot replacement (6 items)           $480.00
+  Ridge cap installation                          $220.00
+  Cleanup & haul-off                              $200.00
+                                   Labor Total:  $5,450.00
+
+MATERIALS
+  OC Duration shingles (24 squares)             $3,360.00
+  30 lb. felt underlayment (24 rolls)             $480.00
+  Ice & water shield (2 squares)                  $220.00
+  Drip edge — aluminum (280 LF)                   $196.00
+  Pipe boots, vents, ridge cap, misc.             $700.00
+                                Materials Total:  $4,956.00
+
+PERMITS & FEES
+  Broward County roofing permit                   $385.00
+  Wind mitigation report                          $150.00
+                                  Permits Total:    $535.00
+
+<span class="b-section">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+  Subtotal                                      $10,941.00
+  Sales Tax (Materials, 7% Broward County)         $346.92
+<span class="b-section">  ───────────────────────────────────────────────────</span>
+<span class="b-green">  TOTAL PROJECT COST                           $11,287.92</span>
+
+<span class="b-section">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAYMENT TERMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+  Deposit due at signing (50%):                  $5,643.96
+  Final payment due at completion (50%):         $5,643.96
+
+<span class="b-section">WARRANTY</span>
+  10-year workmanship · 30-year OC Duration manufacturer (transferable)</div>
+    </div>
+
+    <div class="bid-display" id="bid-bathroom">
+      <div class="bid-display-bar">
+        <div class="bid-display-label">bathroom_remodel_broward.txt</div>
+        <div class="bid-display-time">Generated in 52 sec</div>
+      </div>
+      <div class="bid-body"><span class="b-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  REMODELING BID PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="b-white">CONTRACTOR:   [YOUR COMPANY NAME] · CGC/CBC LICENSE
+PROPERTY:     Broward County, FL · DATE: [DATE]</span>
+
+<span class="b-section">SCOPE — FULL BATHROOM GUT (80 sq ft)</span>
+• Demo tile floor, shower surround, vanity, toilet — haul-off included
+• Schluter Kerdi waterproofing membrane — all shower surfaces
+• Install client-selected floor tile (80 sq ft) + shower wall tile (60 sq ft)
+• New toilet, vanity faucet, shower valve (Moen Posi-Temp), shower drain
+• Install frameless shower door, vanity mirror, light bar, accessories
+• Licensed plumbing subcontractor — FL Plumbing Code compliant
+• Paint walls & ceiling · Touch-up drywall & texture
+
+<span class="b-section">LINE ITEMS</span>
+  Labor total:                                   $3,930.00
+  Materials total (incl. tile/toilet allowances): $2,885.00
+  Broward County permit (if required):             $275.00
+  Sales Tax (7%):                                  $201.95
+<span class="b-section">  ───────────────────────────────────────────────────</span>
+<span class="b-green">  TOTAL PROJECT COST                            $7,291.95</span>
+
+  50% deposit · 50% at completion
+  2-year workmanship warranty · 5-year waterproofing guarantee</div>
+    </div>
+
+    <div class="bid-display" id="bid-hvac">
+      <div class="bid-display-bar">
+        <div class="bid-display-label">hvac_installation_broward.txt</div>
+        <div class="bid-display-time">Generated in 44 sec</div>
+      </div>
+      <div class="bid-body"><span class="b-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    HVAC INSTALLATION PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="b-white">CONTRACTOR:   [YOUR COMPANY NAME] · CAC LICENSE
+EPA 608 Certified · Broward County, FL</span>
+
+<span class="b-section">SCOPE — 3-TON SYSTEM, 1,800 SQ FT</span>
+• Remove existing condenser, air handler, and ductwork (4 runs)
+• Install Carrier / Trane 3-ton 16 SEER2 system — Miami-Dade NOA compliant
+• Install new R-8 insulated flex duct — 4 runs, mastic sealed per FBC
+• New copper line set (25 LF), R-410A charge, condensate float switch
+• Verify breaker / replace disconnect — 230V / 40A
+• Broward County mechanical permit pulled and passed — included
+• FPL rebate application assistance included (up to $250)
+
+<span class="b-section">LINE ITEMS</span>
+  Labor total:                                   $3,885.00
+  Materials (system, duct, line set, refrigerant): $4,615.00
+  Broward County mechanical permit:                $295.00
+  Sales Tax (7%):                                  $323.05
+<span class="b-section">  ───────────────────────────────────────────────────</span>
+<span class="b-green">  TOTAL PROJECT COST                            $9,118.05</span>
+
+  50% deposit · 50% at completion
+  1-year labor · 10-year parts & compressor (Carrier/Trane)</div>
+    </div>
+
+    <div class="bid-display" id="bid-electrical">
+      <div class="bid-display-bar">
+        <div class="bid-display-label">electrical_panel_upgrade_broward.txt</div>
+        <div class="bid-display-time">Generated in 38 sec</div>
+      </div>
+      <div class="bid-body"><span class="b-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  ELECTRICAL BID PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="b-white">CONTRACTOR:   [YOUR COMPANY NAME] · EC/ER LICENSE
+Broward County, FL · DATE: [DATE]</span>
+
+<span class="b-section">SCOPE — 200A UPGRADE + 6 NEW CIRCUITS</span>
+• FPL temporary disconnect coordinated by contractor (no charge to client)
+• Remove existing panel · Install 200A Square D / Eaton (40 circuit)
+• New 200A meter base if required · New service entrance cable (SER 2/0)
+• Ground rod, bonding, NEC 250 compliant
+• 6 new circuits: (2) kitchen 20A GFCI, office 20A, dryer 30A, outdoor 20A GFCI, garage 20A
+• AFCI breakers on all bedroom circuits per NEC 2020
+• Broward County electrical permit — pulled and inspected
+• Certificate of Completion provided to homeowner
+
+<span class="b-section">LINE ITEMS</span>
+  Labor total:                                   $3,260.00
+  Materials (panel, wire, breakers, devices):    $2,110.00
+  Broward County electrical permit:               $325.00
+  Sales Tax (7%):                                 $147.70
+<span class="b-section">  ───────────────────────────────────────────────────</span>
+<span class="b-green">  TOTAL PROJECT COST                            $5,842.70</span>
+
+  50% deposit · 50% at completion · 1-year labor warranty
+  Note: FPL reconnect fee ($50–100) billed directly by FPL</div>
+    </div>
+
+    <div class="bid-display" id="bid-deck">
+      <div class="bid-display-bar">
+        <div class="bid-display-label">deck_construction_broward.txt</div>
+        <div class="bid-display-time">Generated in 51 sec</div>
+      </div>
+      <div class="bid-body"><span class="b-head">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                 DECK CONSTRUCTION PROPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="b-white">CONTRACTOR:   [YOUR COMPANY NAME] · CBC/CGC LICENSE
+Broward County, FL · DATE: [DATE]</span>
+
+<span class="b-section">SCOPE — 12×16 FT GROUND LEVEL DECK (192 sq ft)</span>
+• Sunshine 811 utility locate before any digging
+• (8) concrete footings — 12" dia × 36" depth, 3000 PSI, Sonotube forms
+• 6×6 ACQ PT posts, double 2×10 ACQ PT beam, 2×10 joists at 16" OC
+• Hurricane ties at all joist-to-beam connections (Broward wind uplift req.)
+• Trex Enhance Naturals composite decking — hidden fastener system
+• Built-in benches on 2 sides — ACQ PT framing, composite seat boards
+• 3-step stair with composite treads, 36" wide
+• Broward County building permit + engineered drawings if required
+• All hot-dip galvanized hardware — no zinc-plated (South FL moisture req.)
+
+<span class="b-section">LINE ITEMS</span>
+  Labor total:                                   $4,900.00
+  Materials (concrete, framing, Trex, hardware): $5,770.00
+  Permit + engineered drawings:                    $770.00
+  Sales Tax (7%):                                  $403.90
+<span class="b-section">  ───────────────────────────────────────────────────</span>
+<span class="b-green">  TOTAL PROJECT COST                           $11,843.90</span>
+
+  50% deposit · 50% at completion
+  3-year labor · 25-year Trex fade & stain warranty (transferable)</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SOUTH FL -->
+<section>
+  <div class="container">
+    <div class="section-label">Built For Here</div>
+    <h2>South Florida <span style="color:var(--orange)">Specific</span></h2>
+    <p class="section-sub">Generic AI tools don't know Broward County. BidDraft AI does.</p>
+
+    <div class="fl-grid">
+      <div class="fl-card">
+        <div class="fl-icon">🌀</div>
+        <div>
+          <div class="fl-title">Hurricane & Wind Language Built In</div>
+          <div class="fl-body">Every roofing bid includes Miami-Dade NOA product approval numbers, wind mitigation report language, and hurricane strapping references. Your clients' insurance adjusters expect this. We deliver it automatically.</div>
+        </div>
+      </div>
+      <div class="fl-card">
+        <div class="fl-icon">📋</div>
+        <div>
+          <div class="fl-title">Broward County Permit References</div>
+          <div class="fl-body">Every bid includes the correct Broward County permit category, current fee estimates, and FBC 2023 code section references for your trade. No more Googling permit requirements at 10pm.</div>
+        </div>
+      </div>
+      <div class="fl-card">
+        <div class="fl-icon">⚡</div>
+        <div>
+          <div class="fl-title">FPL & Utility Coordination Language</div>
+          <div class="fl-body">Electrical bids include FPL disconnect coordination notes and rebate program references. HVAC bids include FPL efficiency rebate language. Small details that show clients you know what you're doing.</div>
+        </div>
+      </div>
+      <div class="fl-card">
+        <div class="fl-icon">🔩</div>
+        <div>
+          <div class="fl-title">South Florida Material Specs</div>
+          <div class="fl-body">Galvanized hardware callouts, R-8 duct insulation for South FL climates, ACQ pressure treatment for our moisture levels, and Sunshine 811 utility locates before any digging. Every detail matters down here.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="cta-section" id="get-bid">
+  <div class="cta-inner">
+    <div class="cta-sup">// Free Beta — Limited Spots</div>
+    <h2 class="cta-headline">Get Your<br><span style="color:var(--orange)">First Bid</span><br>Free</h2>
+    <p class="cta-sub">
+      Describe your next job below. We'll send back a complete, professional bid draft
+      — line items, Broward permit language, contract terms — within 24 hours.
+      No credit card. No sign-up. Just a bid.
+    </p>
+
+    <div class="cta-form-wrap" id="bid-form-wrap">
+      <div class="form-title">Submit Your Scope of Work</div>
+      <div class="form-sub">// Takes 3 minutes · Response within 24 hours · 100% free</div>
+
+      <form id="bidForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input type="text" class="form-input" placeholder="John Ramirez" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Email *</label>
+            <input type="email" class="form-input" placeholder="john@sunshineroof.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone (optional)</label>
+            <input type="tel" class="form-input" placeholder="(954) 555-0100">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Trade *</label>
+            <select class="form-select" required>
+              <option value="" disabled selected>Select your trade</option>
+              <option>Roofing</option>
+              <option>HVAC / AC</option>
+              <option>Electrical</option>
+              <option>Plumbing</option>
+              <option>General Contractor</option>
+              <option>Remodeling / Renovation</option>
+              <option>Carpentry / Decks</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Job Description — Describe the scope of work *</label>
+          <textarea class="form-textarea" placeholder="Example: Replace existing 2,400 sq ft asphalt shingle roof on single-family home in Plantation FL. Remove old shingles and underlayment, inspect decking, install new 30-year architectural shingles. Need Broward County permit and wind mitigation report for homeowner's insurance." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Estimated Job Size</label>
+          <select class="form-select">
+            <option value="" disabled selected>Approximate job value</option>
+            <option>Under $5,000</option>
+            <option>$5,000 – $25,000</option>
+            <option>$25,000 – $100,000</option>
+            <option>Over $100,000</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Send My Scope → Get Free Bid Draft</button>
+
+        <div class="form-disclaimer">
+          No credit card · No account required · We email your bid draft within 24 hours<br>
+          Your information is never shared or sold. Ever.
+        </div>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">✅</div>
+        <div class="success-title">You're In The Queue</div>
+        <div class="success-body">
+          Your scope of work was received.<br>
+          Expect your bid draft within 24 hours — usually same day.<br><br>
+          Questions? Reply to the confirmation email<br>
+          or text us at <strong style="color:var(--orange)">(954) 253-9275</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-promise">
+      <div class="promise-item">Free to try</div>
+      <div class="promise-item">South FL specs included</div>
+      <div class="promise-item">Same-day delivery</div>
+      <div class="promise-item">You own the output</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bid<span>Draft</span> AI</div>
+  <div class="footer-sub">
+    AI-powered bid writing for South Florida contractors · Sunrise, FL 33323<br>
+    <a href="mailto:jamesgrandez2021@gmail.com">jamesgrandez2021@gmail.com</a> · Currently in beta — limited spots available<br><br>
+    © 2026 BidDraft AI · Not a licensed contractor · Bid drafts are starting points for your review
+  </div>
+</footer>
+
+<script>
+  // Tab switching for sample bids
+  function showBid(id, btn) {
+    document.querySelectorAll('.bid-display').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.bid-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('bid-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Form submission handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    // Collect form data
+    const name = e.target.querySelector('input[type="text"]').value;
+    const email = e.target.querySelector('input[type="email"]').value;
+    const trade = e.target.querySelector('select').value;
+    // Redirect to Tally form with pre-filled values
+    const tallyUrl = `https://tally.so/r/Pd0LLP?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&trade=${encodeURIComponent(trade)}`;
+    window.open(tallyUrl, '_blank');
+    // Show success message
+    document.getElementById('bidForm').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Scroll reveal for sections
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pain-card, .step, .fl-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translat
