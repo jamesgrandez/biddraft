@@ -1339,73 +1339,8 @@ Broward County, FL · DATE: [DATE]</span>
       <div class="form-title">Submit Your Scope of Work</div>
       <div class="form-sub">// Takes 3 minutes · Response within 24 hours · 100% free · <a href="help.html" style="color:var(--orange);text-decoration:none;" target="_blank">Submission guide →</a></div>
 
-      <form id="bidForm" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Your Name *</label>
-            <input type="text" class="form-input" placeholder="John Ramirez" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Your Email *</label>
-            <input type="email" class="form-input" placeholder="john@sunshineroof.com" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Phone (optional)</label>
-            <input type="tel" class="form-input" placeholder="(954) 555-0100">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Your Trade *</label>
-            <select class="form-select" required>
-              <option value="" disabled selected>Select your trade</option>
-              <option>Roofing</option>
-              <option>HVAC / AC</option>
-              <option>Electrical</option>
-              <option>Plumbing</option>
-              <option>General Contractor</option>
-              <option>Remodeling / Renovation</option>
-              <option>Carpentry / Decks</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Job Description — Describe the scope of work *</label>
-          <textarea class="form-textarea" placeholder="Example: Replace existing 2,400 sq ft asphalt shingle roof on single-family home in Plantation FL. Remove old shingles and underlayment, inspect decking, install new 30-year architectural shingles. Need Broward County permit and wind mitigation report for homeowner's insurance." required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Estimated Job Size</label>
-          <select class="form-select">
-            <option value="" disabled selected>Approximate job value</option>
-            <option>Under $5,000</option>
-            <option>$5,000 – $25,000</option>
-            <option>$25,000 – $100,000</option>
-            <option>Over $100,000</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn-submit">Send My Scope → Get Free Bid Draft</button>
-
-        <div class="form-disclaimer">
-          No credit card · No account required · We email your bid draft within 24 hours<br>
-          Your information is never shared or sold. Ever.
-        </div>
-      </form>
-
-      <div class="success-msg" id="successMsg">
-        <div class="success-icon">✅</div>
-        <div class="success-title">You're In The Queue</div>
-        <div class="success-body">
-          Your scope of work was received.<br>
-          Expect your bid draft within 24 hours — usually same day.<br><br>
-          Questions? Reply to the confirmation email<br>
-          or text us at <strong style="color:var(--orange)">(954) 253-9275</strong>
-        </div>
-      </div>
+      <iframe data-tally-src="https://tally.so/embed/BzBv1K?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Bid Draft" style="margin-top:1.5rem;"></iframe>
+      <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}</script>
     </div>
 
     <div class="cta-promise">
@@ -1434,21 +1369,6 @@ Broward County, FL · DATE: [DATE]</span>
     document.querySelectorAll('.bid-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('bid-' + id).classList.add('active');
     btn.classList.add('active');
-  }
-
-  // Form submission handler
-  function handleSubmit(e) {
-    e.preventDefault();
-    // Collect form data
-    const name = e.target.querySelector('input[type="text"]').value;
-    const email = e.target.querySelector('input[type="email"]').value;
-    const trade = e.target.querySelector('select').value;
-    // Redirect to Tally form with pre-filled values
-    const tallyUrl = `https://tally.so/r/BzBv1K?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&trade=${encodeURIComponent(trade)}`;
-    window.open(tallyUrl, '_blank');
-    // Show success message
-    document.getElementById('bidForm').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
   }
 
   // Smooth scroll for nav links
