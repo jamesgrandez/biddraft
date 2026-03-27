@@ -1022,7 +1022,8 @@
 
   .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     gap: 20px;
     margin-top: 8px;
   }
@@ -1034,11 +1035,24 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
   .testimonial-card:hover {
     border-color: var(--orange);
     transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(232,101,10,0.08);
+  }
+
+  /* Featured card spans both rows */
+  .testimonial-card--featured {
+    grid-row: span 2;
+  }
+  .testimonial-card--featured .testimonial-quote {
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .testimonial-card--featured .testimonial-stars svg {
+    width: 18px; height: 18px;
   }
 
   .testimonial-stars {
@@ -1109,6 +1123,43 @@
     width: 56px; height: 56px;
   }
 
+  /* ── SCROLL TO TOP ── */
+  #scroll-top {
+    position: fixed;
+    bottom: 32px;
+    right: 28px;
+    z-index: 300;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transform: translateY(12px) scale(0.85);
+    transition: opacity 0.25s, transform 0.25s, background 0.15s, box-shadow 0.15s;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(232,101,10,0.35);
+  }
+  #scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  #scroll-top:hover {
+    background: var(--orange2);
+    box-shadow: 0 6px 24px rgba(232,101,10,0.55);
+    transform: translateY(-2px) scale(1.08);
+  }
+  #scroll-top svg {
+    width: 18px; height: 18px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
   /* ── SUCCESS STATE ── */
   .success-msg {
     display: none;
@@ -1163,7 +1214,8 @@
     .compare-grid { grid-template-columns: 1fr; gap: 0; }
     .compare-before { border-right: 1px solid var(--rule); border-bottom: none; }
     .compare-after { border-top: none; }
-    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .testimonial-card--featured { grid-row: span 1; }
 
     /* Sticky mobile CTA bar */
     .mobile-cta-bar {
@@ -1231,15 +1283,15 @@
       </div>
       <div class="hero-stats">
         <div class="hstat">
-          <span class="hstat-num">2 min</span>
+          <span class="hstat-num" data-count="2" data-suffix=" min">2 min</span>
           <span class="hstat-label">Avg bid turnaround</span>
         </div>
         <div class="hstat">
-          <span class="hstat-num">$0</span>
+          <span class="hstat-num" data-count="0" data-prefix="$">$0</span>
           <span class="hstat-label">Cost to try it</span>
         </div>
         <div class="hstat">
-          <span class="hstat-num">24 hr</span>
+          <span class="hstat-num" data-count="24" data-suffix=" hr">24 hr</span>
           <span class="hstat-label">Same-day delivery</span>
         </div>
       </div>
@@ -1441,7 +1493,7 @@ DATE:         March 17, 2026
     <p class="section-sub">South Florida contractors in our beta program.</p>
 
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card testimonial-card--featured">
         <div>
           <div class="testimonial-stars">
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1772,6 +1824,11 @@ Broward County, FL · DATE: [DATE]</span>
   </div>
 </section>
 
+<!-- SCROLL TO TOP -->
+<button id="scroll-top" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <!-- STICKY MOBILE CTA -->
 <div class="mobile-cta-bar">
   <a href="#get-bid" class="mobile-cta-btn">Get Your Free Bid Draft →</a>
@@ -1831,6 +1888,53 @@ Broward County, FL · DATE: [DATE]</span>
     el.style.transition = `opacity 0.5s ease ${(i % 3) * 80}ms, transform 0.5s ease ${(i % 3) * 80}ms`;
     revealObserver.observe(el);
   });
+
+  // ── ANIMATED STAT COUNTERS ──
+  function animateCounter(el) {
+    const end = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    if (isNaN(end) || prefersReducedMotion) return;
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * end);
+      el.textContent = prefix + current + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.hstat-num[data-count]').forEach(el => {
+    statObserver.observe(el);
+  });
+
+  // ── SCROLL TO TOP ──
+  const scrollTopBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
 </script>
 </body>
 </html>
