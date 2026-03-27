@@ -235,6 +235,7 @@
     transition: all 0.15s;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
   }
   .btn-primary::after {
     content: '';
@@ -257,6 +258,7 @@
     text-decoration: none;
     border: 1px solid var(--dim);
     transition: border-color 0.15s, color 0.15s;
+    cursor: pointer;
   }
   .btn-secondary:hover { border-color: var(--offwhite); color: var(--white); }
 
@@ -284,7 +286,7 @@
 
   .hstat-label {
     font-family: 'Roboto Mono', monospace;
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--muted);
@@ -434,11 +436,16 @@
     background: var(--navy);
     padding: 36px 28px;
     border: 1px solid var(--rule);
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
+    cursor: default;
   }
-  .pain-card:hover { border-color: var(--orange); }
+  .pain-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
 
   .pain-card::before {
     content: attr(data-num);
@@ -463,9 +470,9 @@
   }
 
   .pain-body {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.65;
     font-weight: 300;
   }
 
@@ -475,12 +482,6 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     margin-top: 8px;
-  }
-
-  .step {
-    padding: 48px 32px;
-    border: 1px solid var(--rule);
-    position: relative;
   }
 
   .step-num {
@@ -506,9 +507,9 @@
   }
 
   .step-body {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.65;
     font-weight: 300;
   }
 
@@ -628,6 +629,13 @@
     background: var(--navy2);
     border: 1px solid var(--rule);
     padding: 28px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .fl-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.3);
   }
 
   .fl-title {
@@ -648,9 +656,9 @@
   }
 
   .fl-body {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.65;
     font-weight: 300;
   }
 
@@ -868,6 +876,31 @@
     padding-left: 10px;
   }
 
+  /* ── STEP HOVER ── */
+  .step {
+    padding: 48px 32px;
+    border: 1px solid var(--rule);
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .step:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.3);
+  }
+
+  /* ── FOCUS STATES (keyboard nav) ── */
+  :focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+  }
+
+  /* ── NAV SCROLLED STATE ── */
+  nav.scrolled {
+    background: rgba(13,18,32,0.98);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -900,6 +933,16 @@
     color: var(--muted);
     font-family: 'Roboto Mono', monospace;
     font-size: 11px;
+  }
+
+  /* ── REDUCED MOTION (accessibility) ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
   }
 
   /* ── RESPONSIVE ── */
@@ -1427,19 +1470,30 @@ Broward County, FL · DATE: [DATE]</span>
     });
   });
 
-  // Scroll reveal for sections
+  // Nav scroll state
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Scroll reveal with stagger and proper transition
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
+        revealObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.pain-card, .step, .fl-card').forEach(el => {
+  document.querySelectorAll('.pain-card, .step, .fl-card').forEach((el, i) => {
+    if (prefersReducedMotion) return;
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.5s ease ${(i % 3) * 80}ms, transform 0.5s ease ${(i % 3) * 80}ms`;
     revealObserver.observe(el);
   });
 </script>
